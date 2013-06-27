@@ -9,8 +9,6 @@ module Monet::Rails
       config.monet.config_file = File.join(Rails.root, 'config/monet.yml')
     end
 
-
-
   end
 
 end
