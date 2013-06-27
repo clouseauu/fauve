@@ -34,8 +34,14 @@ module Sprockets
       end
 
       def process
-          return to_rgb( colour_scheme[ section ][ ordinal_to_int ordinal ] ) if valid?
-          raise Monet::InvalidMonetInvoke
+          case
+          when !section_exists?
+            raise Monet::UndefinedSectionError
+          when !ordinal_exists?
+            raise Monet::UndefinedOrdinalError
+          else
+            to_rgb( colour_scheme[ section ][ ordinal_to_int ordinal ] )
+          end
       end
 
       private
