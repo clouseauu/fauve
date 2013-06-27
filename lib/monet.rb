@@ -3,6 +3,7 @@ require 'monet/errors'
 require 'monet/config'
 
 if defined? Rails
+  require 'monet/utils'
   require 'monet/railtie'
   require 'monet/helpers'
 end
