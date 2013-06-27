@@ -2,17 +2,25 @@ module Monet
 
   class Utils
 
-    attr_accessor :colour_scheme, :section, :ordinal
+    attr_reader :colour
 
-    def initialize section, ordinal
+    def initialize sass_context, section, ordinal, filters = {}
       @colour_scheme = Monet::Config::colour_scheme
+      @sass_context = sass_context
       @section = section.to_s
       @ordinal = ordinal.to_s.to_sym
+      @filters = filters
+      @colour  = raw_colour
+      process
     end
 
     def valid?
       section_exists? and ordinal_exists?
     end
+
+    private
+
+    attr_reader :colour_scheme, :section, :ordinal, :filters, :ordinals, :sass_context
 
     def process
         case
@@ -21,16 +29,26 @@ module Monet
         when !ordinal_exists?
           raise Monet::UndefinedOrdinalError
         else
-          to_rgb( colour_scheme[ section ][ ordinal_to_int ordinal ] )
+          run_filters
         end
     end
 
-    private
+    def raw_colour
+      Sass::Script::Color.new rgb_raw_colour
+    end
 
-    attr_accessor :ordinals, :ordinal
+    def rgb_raw_colour
+      to_rgb( colour_scheme[ section ][ ordinal_to_int ordinal ] )
+    end
 
     def to_rgb str
       str.scan(/^#(..?)(..?)(..?)$/).first.map {|num| num.ljust(2, num).to_i(16)}
+    end
+
+    def run_filters
+      filters.keys.each do |key|
+        @colour = sass_context.send key.to_sym, colour, filters[key]
+      end
     end
 
     def section_exists?

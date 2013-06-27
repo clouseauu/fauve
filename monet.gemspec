@@ -22,6 +22,9 @@ Gem::Specification.new do |s|
   s.add_dependency 'railties'
   s.add_dependency 'sprockets-rails', '~> 2.0.0'
 
+  s.add_dependency 'pry'
+  s.add_dependency 'awesome_print'
+
   s.add_development_dependency "bundler", "~> 1.3"
   s.add_development_dependency "rake"
   s.add_development_dependency "pry"
