@@ -1,6 +1,6 @@
 # Monet
 
-TODO: Write a gem description
+Monet is a Rails/Sass gem to easily manage colour schemes — Edit
 
 ## Installation
 
