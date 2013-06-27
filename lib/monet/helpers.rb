@@ -19,7 +19,6 @@ module Sprockets
         # lighten(Sass::Script::Color.new([255,128,128]), Sass::Script::Number.new(20) )
     end
 
-
     class MonetUtils
 
       attr_accessor :colour_scheme, :section, :ordinal
@@ -35,7 +34,8 @@ module Sprockets
       end
 
       def process
-        to_rgb( colour_scheme[ section ][ ordinal_to_int ordinal ] ) if valid?
+          return to_rgb( colour_scheme[ section ][ ordinal_to_int ordinal ] ) if valid?
+          raise Monet::InvalidMonetInvoke
       end
 
       private

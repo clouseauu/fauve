@@ -1,4 +1,5 @@
 require 'monet/version'
+require 'monet/errors'
 require 'monet/config'
 
 if defined? Rails
