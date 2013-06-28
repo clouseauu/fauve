@@ -4,33 +4,29 @@ module Monet
 
     attr_reader :colour
 
-    def initialize sass_context, section, ordinal, filters = {}
-      @colour_scheme = Monet::Config::colour_scheme
-      @sass_context = sass_context
-      @section = section.to_s
-      @ordinal = ordinal.to_s.to_sym
-      @filters = filters
-      @colour  = raw_colour
-      process
-    end
+    def initialize options
+      @colour_scheme  = options[:colour_scheme]       || Monet::Config::colour_scheme
+      @sass_context   = options[:sass_context]        || Sass::Script::Functions::EvaluationContext.new {}
+      @section        = options[:section].to_s        || :app
+      @ordinal        = options[:ordinal].to_s.to_sym || :primary
+      @filters        = options[:filters]             || {}
 
-    def valid?
-      section_exists? and ordinal_exists?
+      validate_input
+      @colour  = raw_colour
+      run_filters
     end
 
     private
 
     attr_reader :colour_scheme, :section, :ordinal, :filters, :ordinals, :sass_context
 
-    def process
-        case
-        when !section_exists?
-          raise Monet::UndefinedSectionError
-        when !ordinal_exists?
-          raise Monet::UndefinedOrdinalError
-        else
-          run_filters
-        end
+    def validate_input
+      case
+      when !section_exists?
+        raise Monet::UndefinedSectionError
+      when !ordinal_exists?
+        raise Monet::UndefinedOrdinalError
+      end
     end
 
     def raw_colour

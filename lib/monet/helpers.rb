@@ -6,10 +6,16 @@ module Sprockets
     # to please Websterites
     # alias_method :monet_color, :monet_colour
 
-    Sass::Script::Functions.declare(:monet_colour, [:section, :ordinal], var_kwargs: true)
+    Sass::Script::Functions.declare(:monet, [:section, :ordinal], var_kwargs: true)
 
-    def monet_colour(section, ordinal, filters = {})
-        Monet::Utils.new(self, section, ordinal, filters).colour
+    def monet(section, ordinal, filters = {})
+      Monet::Utils.new(
+        sass_context: self,
+        colour_scheme: Monet::Config::colour_scheme,
+        section: section,
+        ordinal: ordinal,
+        filters: filters
+        ).colour
     end
 
   end
