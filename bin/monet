@@ -1,0 +1,6 @@
+#!/usr/bin/env ruby
+
+require 'monet/cli'
+
+monet = Monet::CLI.run
+exit(1) unless result
