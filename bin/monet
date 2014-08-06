@@ -3,4 +3,4 @@
 require 'monet/cli'
 
 monet = Monet::CLI.run
-exit(1) unless result
+exit(1) unless monet

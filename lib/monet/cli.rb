@@ -1,5 +1,6 @@
 require 'trollop'
 require 'awesome_print'
+require 'rails'
 
 module Monet
 
@@ -16,7 +17,7 @@ module Monet
       Trollop::options do
         opt :output, "Output",  :type => :string, :default => ( defined?(Rails) ? Rails.public_path.to_s : "./" )
         opt :input, "Input",    :type => :string, :default => ( defined?(Rails) ? "#{Rails.root}/config" : "./" )
-        opt :show_variations, "Show variations", :default => true, :short => "-v"
+        opt :skip_variations, "Skip variations", :short => "-v"
       end
     end
     module_function :options
