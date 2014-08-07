@@ -3,19 +3,22 @@ require 'sprockets/sass_functions'
 module Sprockets
   module SassFunctions
 
-    # to please Websterites
-    # alias_method :monet_color, :monet_colour
-
     Sass::Script::Functions.declare(:monet, [:section, :reference], var_kwargs: true)
 
-    def monet(section, ordinal, filters = {})
-      Monet::Engine.new(
-        sass_context: self,
+    def raw_colour(section, reference)
+      Monet::SchemeParser.new(
         colour_scheme: Monet::Config::colour_scheme,
         section: section,
-        reference: reference,
+        reference: reference
+      ).to_s
+    end
+
+    def monet(section, reference, filters = {})
+      Monet::Engine.new(
+        sass_context: self,
+        raw_colour: raw_colour(section, reference),
         filters: filters
-        ).colour
+      ).colour
     end
 
   end

@@ -5,66 +5,29 @@ module Monet
     attr_reader :colour
 
     def initialize options
-      @colour_scheme  = options[:colour_scheme]         || Monet::Config::colour_scheme
-      @sass_context   = options[:sass_context]          || Sass::Script::Functions::EvaluationContext.new {}
-      @section        = options[:section].to_sym        || :app
-      @reference      = options[:reference].to_s.to_sym || :primary
-      @filters        = options[:filters]               || {}
-
-      validate_input
-      @colour  = raw_colour
+      @sass_context     = options[:sass_context]          || Sass::Script::Functions::EvaluationContext.new {}
+      @filters          = options[:filters]               || {}
+      @raw_colour       = options[:raw_colour]
+      @colour           = sass_colour
       run_filters
     end
 
     private
 
-    attr_reader :colour_scheme, :section, :reference, :filters, :ordinals, :sass_context
+    attr_reader :filters, :sass_context, :raw_colour
 
-    def validate_input
-      case
-      when !section_exists?
-        raise Monet::UndefinedSectionError
-      when !ordinal_exists?
-        raise Monet::UndefinedOrdinalError
-      end
+    def sass_colour
+      Sass::Script::Color.new to_rgb(raw_colour)
     end
 
-    def raw_colour
-      Sass::Script::Color.new rgb_raw_colour
-    end
-
-    def rgb_raw_colour
-      to_rgb( colour_scheme[ section ][ ordinal_to_int reference ] )
-    end
-
-    def to_rgb str
-      str.scan(/^#(..?)(..?)(..?)$/).first.map {|num| num.ljust(2, num).to_i(16)}
+    def to_rgb hex_colour
+      hex_colour.scan(/^#(..?)(..?)(..?)$/).first.map {|num| num.ljust(2, num).to_i(16)}
     end
 
     def run_filters
-      filters.keys.each do |key|
-        @colour = sass_context.send key.to_sym, colour, filters[key]
+      filters.keys.each do |filter|
+        @colour = sass_context.send filter.to_sym, colour, filters[filter]
       end
-    end
-
-    def section_exists?
-      colour_scheme.has_key? section
-    end
-
-    def ordinal_exists?
-      ordinals.include? reference
-    end
-
-    def int_to_ordinal int
-      ordinals[ int-1 ]
-    end
-
-    def ordinal_to_int ord
-      ordinals.index ord
-    end
-
-    def ordinals
-      [:primary, :secondary, :tertiary, :quaternary, :quinary, :senary]
     end
 
   end

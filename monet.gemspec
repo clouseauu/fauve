@@ -13,10 +13,11 @@ Gem::Specification.new do |s|
   s.homepage      = ''
   s.license       = 'MIT'
 
-  s.files         = `git ls-files`.split($/)
-  s.executables   = s.files.grep(%r{^bin/}) { |f| File.basename(f) }
-  s.test_files    = s.files.grep(%r{^(test|spec|features)/})
-  s.require_paths = ['lib']
+  s.files                 = `git ls-files`.split($/)
+  s.executables           = s.files.grep(%r{^bin/}) { |f| File.basename(f) }
+  s.test_files            = s.files.grep(%r{^(test|spec|features)/})
+  s.require_paths         = ['lib']
+  s.required_ruby_version = '~> 2'
 
   s.add_dependency 'sass',            '>= 3.1.10'
   s.add_dependency 'rails'

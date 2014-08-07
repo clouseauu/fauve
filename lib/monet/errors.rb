@@ -1,3 +1,3 @@
-class Monet::UndefinedSectionError < StandardError; end
-class Monet::UndefinedOrdinalError < StandardError; end
-class Monet::SyntaxError           < StandardError; end
+class Monet::UndefinedSectionError    < StandardError; end
+class Monet::UndefinedReferenceError  < StandardError; end
+class Monet::SyntaxError              < StandardError; end
