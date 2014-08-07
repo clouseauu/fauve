@@ -5,11 +5,11 @@ module Monet
     attr_reader :colour
 
     def initialize options
-      @colour_scheme  = options[:colour_scheme]       || Monet::Config::colour_scheme
-      @sass_context   = options[:sass_context]        || Sass::Script::Functions::EvaluationContext.new {}
-      @section        = options[:section].to_s        || :app
-      @ordinal        = options[:ordinal].to_s.to_sym || :primary
-      @filters        = options[:filters]             || {}
+      @colour_scheme  = options[:colour_scheme]         || Monet::Config::colour_scheme
+      @sass_context   = options[:sass_context]          || Sass::Script::Functions::EvaluationContext.new {}
+      @section        = options[:section].to_sym        || :app
+      @reference      = options[:reference].to_s.to_sym || :primary
+      @filters        = options[:filters]               || {}
 
       validate_input
       @colour  = raw_colour
@@ -18,7 +18,7 @@ module Monet
 
     private
 
-    attr_reader :colour_scheme, :section, :ordinal, :filters, :ordinals, :sass_context
+    attr_reader :colour_scheme, :section, :reference, :filters, :ordinals, :sass_context
 
     def validate_input
       case
@@ -34,7 +34,7 @@ module Monet
     end
 
     def rgb_raw_colour
-      to_rgb( colour_scheme[ section ][ ordinal_to_int ordinal ] )
+      to_rgb( colour_scheme[ section ][ ordinal_to_int reference ] )
     end
 
     def to_rgb str
@@ -52,7 +52,7 @@ module Monet
     end
 
     def ordinal_exists?
-      ordinals.include? ordinal
+      ordinals.include? reference
     end
 
     def int_to_ordinal int
