@@ -9,7 +9,7 @@ module Sprockets
     Sass::Script::Functions.declare(:monet, [:section, :reference], var_kwargs: true)
 
     def monet(section, ordinal, filters = {})
-      Monet::Utils.new(
+      Monet::Engine.new(
         sass_context: self,
         colour_scheme: Monet::Config::colour_scheme,
         section: section,

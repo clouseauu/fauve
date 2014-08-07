@@ -1,12 +1,12 @@
 require_relative './test_helper'
 
-describe 'Monet Utilities Class' do
+describe 'Monet Engine Class' do
 
   let(:sass_context) { Sass::Script::Functions::EvaluationContext.new({}) }
   let(:amount) { Sass::Script::Number.new(20) }
   let(:colour_scheme) { YAML.load_file File.expand_path("./test/fixtures/monet.yml") }
 
-  let(:monet) { Monet::Utils.new(
+  let(:monet) { Monet::Engine.new(
     sass_context: sass_context,
     colour_scheme: colour_scheme,
     section: "section1",
@@ -26,7 +26,7 @@ describe 'Monet Utilities Class' do
   end
 
   it 'applies filters and returns the correct colour' do
-    filtered_monet = Monet::Utils.new(sass_context: sass_context, colour_scheme: colour_scheme, section: "section1", reference: "primary", filters: { "lighten" => amount, "saturate" => amount } )
+    filtered_monet = Monet::Engine.new(sass_context: sass_context, colour_scheme: colour_scheme, section: "section1", reference: "primary", filters: { "lighten" => amount, "saturate" => amount } )
     filtered_monet.colour.options = {}
     filtered_monet.colour.to_s.should == "#ffcfe7"
   end
@@ -36,7 +36,7 @@ describe 'Monet Utilities Class' do
     let(:sass_context) { Sass::Script::Functions::EvaluationContext.new({}) }
 
     it 'raises an UndefinedSection error if it does not recognise the section' do
-      expect { Monet::Utils.new(
+      expect { Monet::Engine.new(
                 sass_context: sass_context,
                 colour_scheme: colour_scheme,
                 section: "cartman",
@@ -45,7 +45,7 @@ describe 'Monet Utilities Class' do
     end
 
     it 'raises an UndefinedOrdinal error if it does not recognise the ordinal' do
-      expect { Monet::Utils.new(
+      expect { Monet::Engine.new(
                 sass_context: sass_context,
                 colour_scheme: colour_scheme,
                 section: "section1",

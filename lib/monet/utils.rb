@@ -1,6 +1,6 @@
 module Monet
 
-  class Utils
+  class Engine
 
     attr_reader :colour
 
