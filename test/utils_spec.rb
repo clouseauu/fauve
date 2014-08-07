@@ -2,7 +2,7 @@ require_relative './test_helper'
 
 describe 'Monet Engine Class' do
 
-  let(:sass_context) { Sass::Script::Functions::EvaluationContext.new({}) }
+  let(:sass_context) { Sass::Script::Functions::EvaluationContext.new( Sass::Environment.new ) }
   let(:amount) { Sass::Script::Number.new(20) }
   let(:colour_scheme) { YAML.load_file File.expand_path("./test/fixtures/monet.yml") }
 
@@ -33,7 +33,7 @@ describe 'Monet Engine Class' do
 
   context 'when passed incorrect / non-existent sections or ordinals' do
 
-    let(:sass_context) { Sass::Script::Functions::EvaluationContext.new({}) }
+    let(:sass_context) { Sass::Script::Functions::EvaluationContext.new( Sass::Environment.new ) }
 
     it 'raises an UndefinedSection error if it does not recognise the section' do
       expect { Monet::Engine.new(
