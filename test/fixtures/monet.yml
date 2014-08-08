@@ -11,6 +11,6 @@
 - "#288ce4"
 
 :section2:
-  :a_key: "#cff535"
-  :another_key: "#80B601"
+  :a_key:           "#cff535"
+  :another_key:     "#80b601"
   :yet_another_key: "#53a2de"

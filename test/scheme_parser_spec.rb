@@ -69,28 +69,28 @@ describe Monet::SchemeParser do
 
     context "when using keys" do
 
-      let(:section) { :section1 }
-      let(:reference) { 1 }
+      let(:section) { :section2 }
+      let(:reference) { :a_key }
 
       it 'interprets primary colour correctly' do
-        expect(subject.colour).to eq "#ff69b3"
+        expect(subject.colour).to eq "#cff535"
       end
 
       context "when invoking other ordinals" do
 
-        let(:reference) { 7 }
+        let(:reference) { :another_key }
 
         it 'interprets colours in the scheme correctly' do
-          expect(subject.colour).to eq "#3f4549"
+          expect(subject.colour).to eq "#80b601"
         end
       end
 
       context "when invoking the last existing ordinal" do
 
-        let(:reference) { 10 }
+        let(:reference) { :yet_another_key }
 
         it 'interprets the colour correctly' do
-          expect(subject.colour).to eq "#288ce4"
+          expect(subject.colour).to eq "#53a2de"
         end
       end
 
