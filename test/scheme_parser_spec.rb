@@ -28,10 +28,10 @@ describe Monet::SchemeParser do
 
       context "when invoking the last existing ordinal" do
 
-        let(:reference) { :denary }
+        let(:reference) { :nonary }
 
         it 'interprets the colour correctly' do
-          expect(subject.colour).to eq "#288ce4"
+          expect(subject.colour).to eq "#0069d6"
         end
       end
 
@@ -57,10 +57,10 @@ describe Monet::SchemeParser do
 
       context "when invoking the last existing ordinal" do
 
-        let(:reference) { 10 }
+        let(:reference) { 9 }
 
         it 'interprets the colour correctly' do
-          expect(subject.colour).to eq "#288ce4"
+          expect(subject.colour).to eq "#0069d6"
         end
       end
 
@@ -96,29 +96,41 @@ describe Monet::SchemeParser do
 
     end
 
-    # context 'when passed incorrect / non-existent sections or ordinals' do
+    context 'when passed incorrect / non-existent references' do
 
-    #   let(:sass_context) { Sass::Script::Functions::EvaluationContext.new( Sass::Environment.new ) }
+      let(:section) { :section1 }
+      let(:reference) { :denary }
 
-    #   it 'raises an UndefinedSection error if it does not recognise the section' do
-    #     expect { Monet::Engine.new(
-    #               sass_context: sass_context,
-    #               colour_scheme: colour_scheme,
-    #               section: "cartman",
-    #               reference: "primary")
-    #     }.to raise_exception Monet::UndefinedSectionError
-    #   end
+      context "with ordinals" do
 
-    #   it 'raises an UndefinedOrdinal error if it does not recognise the ordinal' do
-    #     expect { Monet::Engine.new(
-    #               sass_context: sass_context,
-    #               colour_scheme: colour_scheme,
-    #               section: "section1",
-    #               reference: "nonononogenary")
-    #     }.to raise_exception Monet::UndefinedOrdinalError
-    #   end
+        it 'raises an UndefinedReference error' do
+          expect{ subject }.to raise_exception Monet::UndefinedReferenceError
+        end
 
-    # end
+      end
+
+      context "with integers" do
+
+        let(:reference) { 10 }
+
+        it 'raises an UndefinedReference error' do
+          expect{ subject }.to raise_exception Monet::UndefinedReferenceError
+        end
+
+      end
+
+      context "with keys" do
+
+        let(:reference) { :a_non_declared_key }
+
+        it 'raises an UndefinedReference error' do
+          expect{ subject }.to raise_exception Monet::UndefinedReferenceError
+        end
+
+      end
+
+
+    end
 
   end
 
