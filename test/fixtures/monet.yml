@@ -1,7 +1,16 @@
 :section1:
 - "#ff69b3"
 - "#444"
+- "#5eff1f"
+- "#00ffee"
+- "#ffdead"
+- "#ffa07a"
+- "#3f4549"
+- "#a5b2b9"
+- "#0069d6"
+- "#288ce4"
 
 :section2:
   :a_key: "#cff535"
   :another_key: "#80B601"
+  :yet_another_key: "#53a2de"

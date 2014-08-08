@@ -1,35 +1,125 @@
-# require_relative './test_helper'
+require_relative './test_helper'
 
-# describe Monet::SchemeParser do
+describe Monet::SchemeParser do
 
-#   let(:colour_scheme) { YAML.load_file File.expand_path("./test/fixtures/monet.yml") }
+  let(:colour_scheme) { YAML.load_file File.expand_path("./test/fixtures/monet.yml") }
+  let(:section) { :section1 }
 
-#   it 'is the right colour as determined by section and ordinal' do
-#     monet.colour.to_s.should == "#ff69b3"
-#   end
+  subject { described_class.new( colour_scheme: colour_scheme, section: section, reference: reference ) }
 
-#   context 'when passed incorrect / non-existent sections or ordinals' do
+  describe "#colour" do
 
-#     let(:sass_context) { Sass::Script::Functions::EvaluationContext.new( Sass::Environment.new ) }
+    context "when using ordinals" do
 
-#     it 'raises an UndefinedSection error if it does not recognise the section' do
-#       expect { Monet::Engine.new(
-#                 sass_context: sass_context,
-#                 colour_scheme: colour_scheme,
-#                 section: "cartman",
-#                 reference: "primary")
-#       }.to raise_exception Monet::UndefinedSectionError
-#     end
+      let(:reference) { :primary }
 
-#     it 'raises an UndefinedOrdinal error if it does not recognise the ordinal' do
-#       expect { Monet::Engine.new(
-#                 sass_context: sass_context,
-#                 colour_scheme: colour_scheme,
-#                 section: "section1",
-#                 reference: "nonononogenary")
-#       }.to raise_exception Monet::UndefinedOrdinalError
-#     end
+      it 'interprets primary colour correctly' do
+        expect(subject.colour).to eq "#ff69b3"
+      end
 
-#   end
+      context "when invoking other ordinals" do
 
-# end
+        let(:reference) { :quaternary }
+
+        it 'interprets colours in the scheme correctly' do
+          expect(subject.colour).to eq "#00ffee"
+        end
+      end
+
+      context "when invoking the last existing ordinal" do
+
+        let(:reference) { :denary }
+
+        it 'interprets the colour correctly' do
+          expect(subject.colour).to eq "#288ce4"
+        end
+      end
+
+    end
+
+
+    context "when using integers" do
+
+      let(:reference) { 1 }
+
+      it 'interprets primary colour correctly' do
+        expect(subject.colour).to eq "#ff69b3"
+      end
+
+      context "when invoking other ordinals" do
+
+        let(:reference) { 7 }
+
+        it 'interprets colours in the scheme correctly' do
+          expect(subject.colour).to eq "#3f4549"
+        end
+      end
+
+      context "when invoking the last existing ordinal" do
+
+        let(:reference) { 10 }
+
+        it 'interprets the colour correctly' do
+          expect(subject.colour).to eq "#288ce4"
+        end
+      end
+
+    end
+
+
+    context "when using keys" do
+
+      let(:section) { :section1 }
+      let(:reference) { 1 }
+
+      it 'interprets primary colour correctly' do
+        expect(subject.colour).to eq "#ff69b3"
+      end
+
+      context "when invoking other ordinals" do
+
+        let(:reference) { 7 }
+
+        it 'interprets colours in the scheme correctly' do
+          expect(subject.colour).to eq "#3f4549"
+        end
+      end
+
+      context "when invoking the last existing ordinal" do
+
+        let(:reference) { 10 }
+
+        it 'interprets the colour correctly' do
+          expect(subject.colour).to eq "#288ce4"
+        end
+      end
+
+    end
+
+    # context 'when passed incorrect / non-existent sections or ordinals' do
+
+    #   let(:sass_context) { Sass::Script::Functions::EvaluationContext.new( Sass::Environment.new ) }
+
+    #   it 'raises an UndefinedSection error if it does not recognise the section' do
+    #     expect { Monet::Engine.new(
+    #               sass_context: sass_context,
+    #               colour_scheme: colour_scheme,
+    #               section: "cartman",
+    #               reference: "primary")
+    #     }.to raise_exception Monet::UndefinedSectionError
+    #   end
+
+    #   it 'raises an UndefinedOrdinal error if it does not recognise the ordinal' do
+    #     expect { Monet::Engine.new(
+    #               sass_context: sass_context,
+    #               colour_scheme: colour_scheme,
+    #               section: "section1",
+    #               reference: "nonononogenary")
+    #     }.to raise_exception Monet::UndefinedOrdinalError
+    #   end
+
+    # end
+
+  end
+
+end
