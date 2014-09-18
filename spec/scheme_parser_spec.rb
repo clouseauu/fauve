@@ -2,7 +2,7 @@ require_relative './test_helper'
 
 describe Monet::SchemeParser do
 
-  let(:colour_scheme) { YAML.load_file File.expand_path("./test/fixtures/monet.yml") }
+  let(:colour_scheme) { YAML.load_file File.expand_path("./spec/fixtures/monet.yml") }
   let(:section) { :section1 }
 
   subject { described_class.new( colour_scheme: colour_scheme, section: section, reference: reference ) }
