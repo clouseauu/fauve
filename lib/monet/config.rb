@@ -2,7 +2,7 @@ module Monet
 
   module Config
 
-    def self.colour_scheme
+    def self.colour_map
       YAML.load_file Monet::Rails::Railtie.config.monet.config_file
     end
 

@@ -7,7 +7,7 @@ module Sprockets
 
     def raw_colour(section, reference)
       Monet::SchemeParser.new(
-        colour_scheme: Monet::Config::colour_scheme,
+        colour_map: Monet::Config::colour_map,
         section: section,
         reference: reference
       ).to_s

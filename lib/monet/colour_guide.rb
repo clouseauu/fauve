@@ -1,7 +1,7 @@
 module Monet
 
   class ColourGuide
-      @colour_scheme  = Monet::Config::colour_scheme
+      @colour_map  = Monet::Config::colour_map
   end
 
 end

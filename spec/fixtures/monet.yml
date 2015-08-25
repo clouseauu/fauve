@@ -1,15 +1,23 @@
-section1:
-- "#ff69b3"
-- "#444"
-- "#5eff1f"
-- "#00ffee"
-- "#ffdead"
-- "#ffa07a"
-- "#3f4549"
-- "#a5b2b9"
-- "#0069d6"
+scheme:
+- '#131210'
+- '#c05d33'
+- '#e5b455'
+- '#3c8399'
+- '#d8ccb2'
 
-section2:
-  a_key:           "#cff535"
-  another_key:     "#80b601"
-  yet_another_key: "#53a2de"
+forms:
+  main_bg:        '#f60'
+  alternate_bg:   '#9cde0d'
+  main_text:      '#5af8de'
+
+links:
+  main_text:      scheme[1]
+  main_hover:     scheme[1], lighten=10, hue=20
+
+buttons:
+  main_bg:        scheme[3]
+  main_text:      scheme[0]
+  success_bg:     scheme[3], darken=10
+
+odd_case:
+  main:           '#4de3ef'
