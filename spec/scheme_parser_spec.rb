@@ -1,6 +1,9 @@
 require 'spec_helper'
 
-describe Monet::SchemeParser do
+module Monet
+  module Parsers
+
+describe SchemeParser do
 
   let(:colour_map) { YAML.load_file File.expand_path("./spec/fixtures/monet.yml") }
   let(:section)    { :scheme }
@@ -98,4 +101,6 @@ describe Monet::SchemeParser do
       end
     end
   end
+end
+end
 end
