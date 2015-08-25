@@ -10,19 +10,19 @@ module Monet
     def initialize(colour_scheme: Monet::Config::colour_scheme, section: :app, reference: 0)
       @section        = colour_scheme[section.to_s] rescue Monet::UndefinedSectionError.new("Monet section doesn't exist")
       @reference      = reference.to_s
-      parse!
+      @colour         = parse_colour
     end
 
     private
 
     attr_reader :section, :reference
 
-    def parse!
-      @colour = case
-        when (reference_is_digit? && section_contains_index?( reference.to_i - 1 ))
-            section[ (reference.to_i - 1) ]
-        when reference_is_ordinal? && section_contains_index?( ordinal_to_int(reference) )
-          section[ordinal_to_int(reference)]
+    def parse_colour
+      case
+        when reference_is_digit_and_exists?
+            section[ reference_index ]
+        when reference_is_ordinal_and_exists?
+          section[ ordinal ]
         when section_contains_key?
             section[reference]
         else
@@ -30,6 +30,13 @@ module Monet
         end
     end
 
+    def reference_is_digit_and_exists?
+      reference_is_digit? && section_contains_index?( reference_index )
+    end
+
+    def reference_is_ordinal_and_exists?
+      reference_is_ordinal? && section_contains_index?( ordinal )
+    end
 
     def reference_is_ordinal?
       ORDINALS.include? reference
@@ -47,8 +54,12 @@ module Monet
       !section[ index ].nil?
     end
 
-    def ordinal_to_int ref
-      ORDINALS.index ref
+    def ordinal
+      ORDINALS.index(reference)
+    end
+
+    def reference_index
+      reference.to_i - 1
     end
 
   end
