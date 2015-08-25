@@ -68,22 +68,20 @@ describe SchemeParser do
       end
     end
 
-    # context 'when referencing another section' do
-    #   let(:section)   { :links }
-    #   let(:reference) { :main_text }
+    context 'when referencing another section' do
+      let(:section)   { :links }
+      let(:reference) { :main_text }
 
-    #   it 'interprets the colour correctly' do
-    #     expect(subject.colour).to eq '#c05d33'
-    #   end
-    # end
+      it 'interprets the colour correctly' do
+        expect(subject.colour).to eq '#c05d33'
+      end
+    end
 
     context 'when passed incorrect / non-existent references' do
 
       let(:section) { :scheme }
-      let(:reference) { :denary }
 
       context 'with integers' do
-
         let(:reference) { 10 }
 
         it 'raises an UndefinedReference error' do
