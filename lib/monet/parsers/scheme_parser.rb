@@ -9,7 +9,7 @@ module Monet
 
       def initialize(colour_map: Monet::Config::colour_map, section: :app, reference: 0)
         @colour_map     = colour_map
-        @section        = colour_map[section.to_s] rescue Monet::UndefinedSectionError.new("Monet section doesn't exist")
+        @section        = SectionParser.parse(colour_map, section)
         @reference      = ReferenceParser.parse(reference)
         @colour         = parse_colour
       end

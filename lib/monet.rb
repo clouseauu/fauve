@@ -4,6 +4,7 @@ require 'monet/config'
 
 if defined? Rails
   require 'monet/engine'
+  require 'monet/parsers/section_parser'
   require 'monet/parsers/reference_parser'
   require 'monet/parsers/scheme_parser'
   require 'monet/railtie'
