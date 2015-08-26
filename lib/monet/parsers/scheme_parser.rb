@@ -29,26 +29,30 @@ module Monet
       end
 
       def fetch_colour
-        if is_valid_hex_colour?
+        if is_valid_hex_colour?(colour_candidate)
           @colour = colour_candidate
         else
-          while references_another_section? do
-            new_section       = colour_candidate[/[^\[]+/]
-            new_reference     = colour_candidate.match(/\[(.*?)\]/)[1]
-            raise Monet::CircularReferenceError.new('errrorrr') if @@visited_sections.include?([new_section, new_reference])
-            @@visited_sections << [new_section, new_reference]
-            @colour_candidate = self.class.new(colour_map: colour_map, section: new_section, reference: new_reference).colour
-            @colour           = colour_candidate
+          while references_another_section?(colour_candidate) do
+            recurse_and_parse_colour(colour_candidate)
           end
         end
       end
 
-      def references_another_section?
-        /\[([a-z_]|[0-9])+\]/ === colour_candidate
+      def recurse_and_parse_colour(colour)
+        new_section       = colour[/[^\[]+/]
+        new_reference     = colour.match(/\[(.*?)\]/)[1]
+        raise Monet::CircularReferenceError.new('errrorrr') if @@visited_sections.include?([new_section, new_reference])
+        @@visited_sections << [new_section, new_reference]
+        @colour_candidate = self.class.new(colour_map: colour_map, section: new_section, reference: new_reference).colour
+        @colour           = colour_candidate
       end
 
-      def is_valid_hex_colour?
-        /^#(?:[0-9a-fA-F]{3}){1,2}$/ === colour_candidate
+      def references_another_section?(colour)
+        /\[([a-z_]|[0-9])+\]/ === colour
+      end
+
+      def is_valid_hex_colour?(colour)
+        /^#(?:[0-9a-fA-F]{3}){1,2}$/ === colour
       end
 
     end
