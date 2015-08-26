@@ -72,8 +72,24 @@ describe SchemeParser do
       let(:section)   { :links }
       let(:reference) { :main_text }
 
-      it 'interprets the colour correctly' do
-        expect(subject.colour).to eq '#c05d33'
+      context 'when the reference is valid' do
+        it 'interprets the colour correctly' do
+          expect(subject.colour).to eq '#c05d33'
+        end
+      end
+
+      context 'when the reference is invalid' do
+        let(:reference) { :invalid_red }
+        it 'raises an UndefinedReference error' do
+        expect{ subject }.to raise_exception Monet::UndefinedReferenceError
+        end
+      end
+
+      context 'when the reference is circular' do
+        let(:reference) { :circular_1 }
+        it 'raises a CircularReferenceError error' do
+        expect{ subject }.to raise_exception Monet::CircularReferenceError
+        end
       end
     end
 

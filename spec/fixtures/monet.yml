@@ -13,6 +13,9 @@ forms:
 links:
   main_text:      scheme[1]
   main_hover:     scheme[1], lighten=10, hue=20
+  invalid_ref:    scheme[7]
+  circular_1:     links[circular_2]
+  circular_2:     links[circular_1]
 
 buttons:
   main_bg:        scheme[3]

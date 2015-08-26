@@ -28,11 +28,11 @@ module Monet
       attr_reader :original_reference
 
       def is_digit?
-        /^[0-9]*$/ =~ original_reference
+        /^[0-9]*$/ === original_reference
       end
 
       def is_valid_string?
-        /^[a-zA-Z\-_]+$/ =~ original_reference
+        /^[a-z]+[a-zA-Z0-9\-_]+$/ === original_reference
       end
 
     end

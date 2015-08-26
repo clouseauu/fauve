@@ -4,6 +4,8 @@ module Monet
 
     class SchemeParser
 
+      @@visited_sections = []
+
       attr_accessor :colour
       alias_method :to_s, :colour
 
@@ -33,6 +35,8 @@ module Monet
           while references_another_section? do
             new_section       = colour_candidate[/[^\[]+/]
             new_reference     = colour_candidate.match(/\[(.*?)\]/)[1]
+            raise Monet::CircularReferenceError.new('errrorrr') if @@visited_sections.include?([new_section, new_reference])
+            @@visited_sections << [new_section, new_reference]
             @colour_candidate = self.class.new(colour_map: colour_map, section: new_section, reference: new_reference).colour
             @colour           = colour_candidate
           end
@@ -40,7 +44,7 @@ module Monet
       end
 
       def references_another_section?
-        /\[([a-z]|[0-9])+\]/ === colour_candidate
+        /\[([a-z_]|[0-9])+\]/ === colour_candidate
       end
 
       def is_valid_hex_colour?
