@@ -5,16 +5,16 @@ module Monet
 
     describe SchemeParser do
 
-      let(:colour_map) { YAML.load_file File.expand_path("./spec/fixtures/monet.yml") }
-      let(:section)    { :scheme }
+      let(:map)   { YAML.load_file File.expand_path("./spec/fixtures/monet.yml") }
+      let(:section_name) { :scheme }
 
-      subject { described_class.new( colour_map: colour_map, section: section, reference: reference ) }
+      subject { described_class.new( map: map, section_name: section_name, reference_name: reference_name ) }
 
       describe "#colour" do
 
         context "when using integers" do
 
-          let(:reference) { 0 }
+          let(:reference_name) { 0 }
 
           it 'interprets primary colour correctly' do
             expect(subject.colour).to eq "#131210"
@@ -22,7 +22,7 @@ module Monet
 
           context "when invoking other integers" do
 
-            let(:reference) { 2 }
+            let(:reference_name) { 2 }
 
             it 'interprets colours in the scheme correctly' do
               expect(subject.colour).to eq "#e5b455"
@@ -31,7 +31,7 @@ module Monet
 
           context "when invoking the last existing integer" do
 
-            let(:reference) { 4 }
+            let(:reference_name) { 4 }
 
             it 'interprets the colour correctly' do
               expect(subject.colour).to eq "#d8ccb2"
@@ -41,8 +41,8 @@ module Monet
 
         context "when using keys" do
 
-          let(:section) { :forms }
-          let(:reference) { :main_bg }
+          let(:section_name) { :forms }
+          let(:reference_name) { :main_bg }
 
           it 'interprets primary colour correctly' do
             expect(subject.colour).to eq "#f60"
@@ -50,7 +50,7 @@ module Monet
 
           context "when invoking other keys" do
 
-            let(:reference) { :alternate_bg }
+            let(:reference_name) { :alternate_bg }
 
             it 'interprets colours in the scheme correctly' do
               expect(subject.colour).to eq "#9cde0d"
@@ -59,7 +59,7 @@ module Monet
 
           context 'when invoking the last existing key' do
 
-            let(:reference) { :main_text }
+            let(:reference_name) { :main_text }
 
             it 'interprets the colour correctly' do
               expect(subject.colour).to eq '#5af8de'
@@ -68,8 +68,8 @@ module Monet
         end
 
         context 'when referencing another section' do
-          let(:section)   { :links }
-          let(:reference) { :main_text }
+          let(:section_name)   { :links }
+          let(:reference_name) { :main_text }
 
           context 'when the reference is valid' do
             it 'interprets the colour correctly' do
@@ -78,14 +78,14 @@ module Monet
           end
 
           context 'when the reference is invalid' do
-            let(:reference) { :invalid_red }
+            let(:reference_name) { :invalid_red }
             it 'raises an UndefinedReference error' do
             expect{ subject }.to raise_exception Monet::UndefinedReferenceError
             end
           end
 
           context 'when the reference is circular' do
-            let(:reference) { :circular_1 }
+            let(:reference_name) { :circular_1 }
             it 'raises a CircularReferenceError error' do
             expect{ subject }.to raise_exception Monet::CircularReferenceError
             end
@@ -94,10 +94,10 @@ module Monet
 
         context 'when passed incorrect / non-existent references' do
 
-          let(:section) { :scheme }
+          let(:section_name) { :scheme }
 
           context 'with integers' do
-            let(:reference) { 10 }
+            let(:reference_name) { 10 }
 
             it 'raises an UndefinedReference error' do
               expect{ subject }.to raise_exception Monet::UndefinedReferenceError
@@ -106,7 +106,7 @@ module Monet
 
           context 'with keys' do
 
-            let(:reference) { :a_non_declared_key }
+            let(:reference_name) { :a_non_declared_key }
 
             it 'raises an UndefinedReference error' do
               expect{ subject }.to raise_exception Monet::UndefinedReferenceError
