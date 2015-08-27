@@ -6,7 +6,7 @@ module Sprockets
     Sass::Script::Functions.declare(:monet, [:section, :reference], var_kwargs: true)
 
     def raw_colour(section, reference)
-      Monet::Parsers::SchemeParser.new(
+      Monet::ColourScheme.new(
         colour_map: Monet::Config::colour_map,
         section: section,
         reference: reference
