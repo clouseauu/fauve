@@ -8,10 +8,6 @@ module Monet
         @map = map
       end
 
-      def section(section_name)
-        map[section_name.to_s]
-      end
-
       private
     end
   end
