@@ -6,12 +6,19 @@ module Monet
 
     let(:map)   { YAML.load_file File.expand_path("./spec/fixtures/monet.yml") }
     let(:section_name) { :scheme }
+    let(:reference_name) { 2 }
 
     subject { described_class.new( map: map, section_name: section_name, reference_name: reference_name ) }
 
-    describe "#colour" do
+    describe '#initialize' do
+      it 'instantiates a full colour scheme' do
+        expect(subject).to respond_to :colour
+      end
+    end
 
-      context "when using integers as a reference" do
+    describe '#colour' do
+
+      context 'when using integers as a reference' do
         let(:reference_name) { 3 }
 
         it 'interprets primary colour correctly' do
