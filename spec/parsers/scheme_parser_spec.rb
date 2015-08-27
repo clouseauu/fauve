@@ -12,104 +12,30 @@ module Monet
 
       describe "#colour" do
 
-        context "when using integers" do
-
-          let(:reference_name) { 0 }
+        context "when using integers as a reference" do
+          let(:reference_name) { 3 }
 
           it 'interprets primary colour correctly' do
-            expect(subject.colour).to eq "#131210"
-          end
-
-          context "when invoking other integers" do
-
-            let(:reference_name) { 2 }
-
-            it 'interprets colours in the scheme correctly' do
-              expect(subject.colour).to eq "#e5b455"
-            end
-          end
-
-          context "when invoking the last existing integer" do
-
-            let(:reference_name) { 4 }
-
-            it 'interprets the colour correctly' do
-              expect(subject.colour).to eq "#d8ccb2"
-            end
+            expect(subject.colour).to eq "#3c8399"
           end
         end
 
-        context "when using keys" do
-
+        context 'when using keys as a reference' do
           let(:section_name) { :forms }
-          let(:reference_name) { :main_bg }
+          let(:reference_name) { :main_text }
 
           it 'interprets primary colour correctly' do
-            expect(subject.colour).to eq "#f60"
-          end
-
-          context "when invoking other keys" do
-
-            let(:reference_name) { :alternate_bg }
-
-            it 'interprets colours in the scheme correctly' do
-              expect(subject.colour).to eq "#9cde0d"
-            end
-          end
-
-          context 'when invoking the last existing key' do
-
-            let(:reference_name) { :main_text }
-
-            it 'interprets the colour correctly' do
-              expect(subject.colour).to eq '#5af8de'
-            end
+            expect(subject.colour).to eq "#5af8de"
           end
         end
 
-        context 'when referencing another section' do
-          let(:section_name)   { :links }
-          let(:reference_name) { :main_text }
+        context 'when referencing a multi-level tree' do
+          let(:section_name)   { :multi_level }
+          let(:reference_name) { :level }
 
           context 'when the reference is valid' do
             it 'interprets the colour correctly' do
-              expect(subject.colour).to eq '#c05d33'
-            end
-          end
-
-          context 'when the reference is invalid' do
-            let(:reference_name) { :invalid_red }
-            it 'raises an UndefinedReference error' do
-            expect{ subject }.to raise_exception Monet::UndefinedReferenceError
-            end
-          end
-
-          context 'when the reference is circular' do
-            let(:reference_name) { :circular_1 }
-            it 'raises a CircularReferenceError error' do
-            expect{ subject }.to raise_exception Monet::CircularReferenceError
-            end
-          end
-        end
-
-        context 'when passed incorrect / non-existent references' do
-
-          let(:section_name) { :scheme }
-
-          context 'with integers' do
-            let(:reference_name) { 10 }
-
-            it 'raises an UndefinedReference error' do
-              expect{ subject }.to raise_exception Monet::UndefinedReferenceError
-            end
-          end
-
-          context 'with keys' do
-
-            let(:reference_name) { :a_non_declared_key }
-
-            it 'raises an UndefinedReference error' do
-              expect{ subject }.to raise_exception Monet::UndefinedReferenceError
+              expect(subject.colour).to eq '#e5b455'
             end
           end
         end

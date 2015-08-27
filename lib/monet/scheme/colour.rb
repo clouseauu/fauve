@@ -12,15 +12,7 @@ module Monet
         @reference  = reference
         @candidate  = operations.shift
         @filters    = operations
-        @raw_colour = raw_colour
-      end
-
-      def raw_colour
-        return candidate if is_valid_hex_colour?(candidate)
-        while references_another_section?(candidate) do
-          resolve(candidate)
-        end
-        candidate
+        @raw_colour = determine_raw_colour
       end
 
       def colour
@@ -36,8 +28,17 @@ module Monet
 
       attr_reader :colour_map, :section, :reference, :operations, :candidate
 
+      def determine_raw_colour
+        return candidate if is_valid_hex_colour?(candidate)
+        while references_another_section?(candidate) do
+          resolve(candidate)
+        end
+        @@candidates = []
+        candidate
+      end
+
       def resolve(colour)
-        raise Monet::CircularReferenceError.new('errrorrr') if @@candidates.include?(colour)
+        raise Monet::CircularReferenceError.new('Circular reference detected') if @@candidates.include?(colour)
         @@candidates << colour
         @candidate = recursed(colour).raw_colour
       end

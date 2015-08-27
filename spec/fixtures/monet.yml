@@ -19,8 +19,11 @@ links:
 
 buttons:
   main_bg:        scheme[3]
-  main_text:      scheme[0]
+  main_text:      scheme[2]
   success_bg:     scheme[3], darken=10
+
+multi_level:
+  level:          buttons[main_text]
 
 odd_case:
   main:           '#4de3ef'

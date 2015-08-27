@@ -10,12 +10,17 @@ module Monet
       end
 
       def to_h
-        colour_map.map[name]
+        return colour_map.map[name] if section_exists?
+        raise Monet::UndefinedSectionError.new('Section is not referenced in config')
       end
 
       private
 
       attr_reader :colour_map
+
+      def section_exists?
+        !!colour_map.map[name]
+      end
 
     end
   end
