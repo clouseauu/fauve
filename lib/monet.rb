@@ -8,7 +8,7 @@ if defined? Rails
   require 'monet/scheme/section'
   require 'monet/scheme/reference'
   require 'monet/scheme/colour'
-  require 'monet/parsers/scheme_parser'
+  require 'monet/colour_scheme'
   require 'monet/railtie'
   require 'monet/helpers'
 end
