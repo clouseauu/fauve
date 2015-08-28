@@ -1,6 +1,4 @@
 require 'sprockets/railtie'
-require 'awesome_print'
-
 
 module Monet::Rails
 

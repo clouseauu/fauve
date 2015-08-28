@@ -1,5 +1,4 @@
 require 'trollop'
-require 'awesome_print'
 require 'rails'
 
 module Monet

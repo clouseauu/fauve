@@ -1,25 +1,25 @@
-require 'sprockets/sass_functions'
+module Sass
+  module Script
+    module Functions
 
-module Sprockets
-  module SassFunctions
+      declare(:monet, [:section, :reference], var_kwargs: true)
 
-    Sass::Script::Functions.declare(:monet, [:section, :reference], var_kwargs: true)
+      def raw_colour(section, reference)
+        Monet::ColourScheme.new(
+          map: Monet::Config::colour_map,
+          section_name: section,
+          reference_name: reference
+        ).to_s
+      end
 
-    def raw_colour(section, reference)
-      Monet::ColourScheme.new(
-        colour_map: Monet::Config::colour_map,
-        section: section,
-        reference: reference
-      ).to_s
+      def monet(section, reference, filters = {})
+        Monet::Engine.new(
+          sass_context: self,
+          raw_colour: raw_colour(section, reference),
+          filters: filters
+        ).colour
+      end
+
     end
-
-    def monet(section, reference, filters = {})
-      Monet::Engine.new(
-        sass_context: self,
-        raw_colour: raw_colour(section, reference),
-        filters: filters
-      ).colour
-    end
-
   end
 end
