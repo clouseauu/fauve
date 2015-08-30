@@ -3,6 +3,7 @@ require 'monet/errors'
 require 'monet/config'
 
 if defined? Rails
+  require 'sprockets/railtie'
   require 'monet/engine'
   require 'monet/scheme/colour_map'
   require 'monet/scheme/section'

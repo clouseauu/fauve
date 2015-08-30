@@ -1,5 +1,3 @@
-require 'sprockets/railtie'
-
 module Monet::Rails
 
   class Railtie < ::Rails::Railtie

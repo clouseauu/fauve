@@ -24,8 +24,6 @@ module Monet
         expect(subject.colour_map).to have_key 'multi_level'
         expect(subject.colour_map).to have_key 'odd_case'
       end
-
-
     end
   end
 end

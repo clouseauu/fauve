@@ -4,6 +4,7 @@ CodeClimate::TestReporter.start
 require 'pry'
 require 'sass'
 require 'yaml'
+require 'sprockets/railtie'
 require 'monet/config'
 require 'monet/railtie'
 require 'monet/errors'
