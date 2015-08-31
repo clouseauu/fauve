@@ -1,4 +1,4 @@
-module Monet
+module Fauve
   module Scheme
 
     # Representation of a colour map as part of a wider scheme.

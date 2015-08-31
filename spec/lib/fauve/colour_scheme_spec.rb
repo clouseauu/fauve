@@ -1,10 +1,10 @@
 require 'spec_helper'
 
-module Monet
+module Fauve
 
   describe ColourScheme do
 
-    let(:map)   { YAML.load_file File.expand_path("./spec/fixtures/monet.yml") }
+    let(:map)   { YAML.load_file File.expand_path("./spec/fixtures/fauve.yml") }
     let(:section_name) { :scheme }
     let(:reference_name) { 2 }
 

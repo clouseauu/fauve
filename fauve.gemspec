@@ -1,15 +1,15 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'monet/version'
+require 'fauve/version'
 
 Gem::Specification.new do |s|
-  s.name          = 'monet'
-  s.version       = Monet::VERSION
+  s.name          = 'fauve'
+  s.version       = Fauve::VERSION
   s.authors       = ['Daniel Angel-Bradford', 'Timothy Dang']
   s.email         = ['locusdelicti@gmail.com', 'timothyqd@gmail.com']
-  s.description   = %q{Monet lets you manage your app's colour scheme}
-  s.summary       = %q{Monet lets you manage your app's colour scheme}
+  s.description   = %q{Fauve lets you manage your app's colour scheme}
+  s.summary       = %q{Fauve lets you manage your app's colour scheme}
   s.homepage      = ''
   s.license       = 'MIT'
 

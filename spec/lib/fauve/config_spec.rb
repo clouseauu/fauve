@@ -1,12 +1,12 @@
 require 'spec_helper'
 
-module Monet
+module Fauve
   describe Config do
 
-    let(:config_file)   { File.expand_path("./spec/fixtures/monet.yml") }
+    let(:config_file)   { File.expand_path("./spec/fixtures/fauve.yml") }
 
     before do
-      allow(Monet::Rails::Railtie.config.monet).to receive(:config_file).and_return(config_file)
+      allow(Fauve::Rails::Railtie.config.fauve).to receive(:config_file).and_return(config_file)
     end
 
     subject { described_class }

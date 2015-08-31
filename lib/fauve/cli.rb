@@ -1,9 +1,9 @@
 require 'trollop'
 require 'rails'
 
-module Monet
+module Fauve
 
-  #monet -o x/y/x.html [rails/public] -i x/y/z.yml [rails/config/monet.xml] -v [variations default true]
+  #fauve -o x/y/x.html [rails/public] -i x/y/z.yml [rails/config/fauve.xml] -v [variations default true]
 
   module CLI
 

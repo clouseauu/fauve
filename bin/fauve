@@ -1,0 +1,6 @@
+#!/usr/bin/env ruby
+
+require 'fauve/cli'
+
+fauve = Fauve::CLI.run
+exit(1) unless fauve

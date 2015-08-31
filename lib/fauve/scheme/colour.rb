@@ -1,10 +1,10 @@
-module Monet
+module Fauve
   module Scheme
 
     # Representation of a colour as part of a wider scheme.
     # Holds a raw colour and a colour with filters applied.
-    # Requires Monet::Scheme::ColourMap, Monet::Scheme::Section
-    # and Monet::Scheme::Reference
+    # Requires Fauve::Scheme::ColourMap, Fauve::Scheme::Section
+    # and Fauve::Scheme::Reference
 
     class Colour
 
@@ -44,7 +44,7 @@ module Monet
       end
 
       def resolve(colour)
-        raise Monet::CircularReferenceError.new('Circular reference detected') if @@candidates.include?(colour)
+        raise Fauve::CircularReferenceError.new('Circular reference detected') if @@candidates.include?(colour)
         @@candidates << colour
         @candidate = recursed(colour).raw_colour
       end
@@ -64,7 +64,7 @@ module Monet
       def operations
         @operations ||= section.to_h[reference.key].split(',').collect{ |element| element.strip }
       rescue
-        raise Monet::UndefinedReferenceError.new("Reference isn't a valid index or key")
+        raise Fauve::UndefinedReferenceError.new("Reference isn't a valid index or key")
       end
 
       def is_valid_hex_colour?

@@ -1,9 +1,9 @@
-module Monet
+module Fauve
 
-  # Interface for Monet to talk to Sass.
+  # Interface for Fauve to talk to Sass.
   # Applies filters and returns Sass-Object colours
-  # Requires Monet::Scheme::ColourMap, Monet::Scheme::Section
-  # and Monet::Scheme::Reference
+  # Requires Fauve::Scheme::ColourMap, Fauve::Scheme::Section
+  # and Fauve::Scheme::Reference
 
   class Engine
 

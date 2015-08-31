@@ -1,12 +1,12 @@
 require 'spec_helper'
 
-module Monet
+module Fauve
   module Scheme
     describe Section do
 
       let(:section_name) { 'i_like_bananas' }
-      let(:config)  { YAML.load_file File.expand_path("./spec/fixtures/monet.yml") }
-      let(:colour_map) { Monet::Scheme::ColourMap.new(config) }
+      let(:config)  { YAML.load_file File.expand_path("./spec/fixtures/fauve.yml") }
+      let(:colour_map) { Fauve::Scheme::ColourMap.new(config) }
 
       subject { described_class.new(colour_map, section_name) }
 
@@ -30,7 +30,7 @@ module Monet
           let(:section_name) { 'i_like_bananas' }
 
           it 'returns the section hash' do
-            expect{subject.to_h}.to raise_exception Monet::UndefinedSectionError
+            expect{subject.to_h}.to raise_exception Fauve::UndefinedSectionError
           end
         end
 

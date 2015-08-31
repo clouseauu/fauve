@@ -1,4 +1,4 @@
-module Monet
+module Fauve
   module Scheme
 
       # Representation of a reference as part of a wider scheme.
@@ -20,7 +20,7 @@ module Monet
         when reference_is_valid_string?
           reference_name.to_s
         else
-          raise Monet::InvalidReferenceError.new("Reference isn't a valid index or key")
+          raise Fauve::InvalidReferenceError.new("Reference isn't a valid index or key")
         end
       end
 

@@ -1,13 +1,13 @@
 require 'spec_helper'
 
-describe Monet::Engine do
+describe Fauve::Engine do
 
   let(:sass_context) { Sass::Script::Functions::EvaluationContext.new( Sass::Environment.new ) }
   let(:amount) { Sass::Script::Number.new(20) }
   let(:filters) { Hash.new }
   let(:raw_colour) { "#ff69b3" }
 
-  let(:engine) { Monet::Engine.new(
+  let(:engine) { Fauve::Engine.new(
     context: sass_context,
     raw_colour: raw_colour,
     filters: filters

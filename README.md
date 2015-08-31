@@ -1,18 +1,18 @@
-# Monet
+# Fauve
 
-Monet is a Rails/Sass gem to help you manage your app's colour schemes.
+Fauve is a Rails/Sass gem to help you manage your app's colour schemes.
 
-Have you had to scour through a sizeable app's CSS/SCSS/Sass files to change hard-coded colour hex values because you're re-branding? Have you ended up with a `colors.sass` or similar file with 1000 lines of variables? Solving this problem is Monet's _raison d'être_.
+Have you had to scour through a sizeable app's CSS/SCSS/Sass files to change hard-coded colour hex values because you're re-branding? Have you ended up with a `colors.sass` or similar file with 1000 lines of variables? Solving this problem is Fauve's _raison d'être_.
 
 ## The basic premise
 
 As a rule of thumb, you want to work with about five colours when selecting a scheme. You can have fewer, but when you have _too many_, that's when maintenance becomes nightmarish.
 
-Monet allows you to have a basic set of colours and define variations to use in different scenarios.
+Fauve allows you to have a basic set of colours and define variations to use in different scenarios.
 
 ## Usage
 
-1. Add a `monet.yml` file under `config` in your rails app:
+1. Add a `fauve.yml` file under `config` in your rails app:
 
 ```yaml
 ---
@@ -36,12 +36,12 @@ odd_case:
   main:           '#4de3ef'
 ```
 
-2. Reference the colours in your SCSS/Sass files by calling the `monet` function, passing `section` and `key`:
+2. Reference the colours in your SCSS/Sass files by calling the `fauve` function, passing `section` and `key`:
 
 ```sass
 .button
-  background: monet(buttons, main_bg)
-  color: monet(buttons, main_text)
+  background: fauve(buttons, main_bg)
+  color: fauve(buttons, main_text)
   padding: 20px
   ...
 ```
@@ -50,8 +50,8 @@ You can also use number keys to reference your colours if you use Array syntax, 
 
 ```sass
 .button
-  background: monet(scheme, 3)
-  color: monet(scheme, 2)
+  background: fauve(scheme, 3)
+  color: fauve(scheme, 2)
   padding: 20px
   ...
 ```
@@ -60,8 +60,8 @@ Furthermore, you may add any number of Sass colour filters using the following s
 
 ```sass
 .button
-  background: monet(buttons, main_bg, $darken: 20, $rgba: .5)
-  color: monet(buttons, main_text, $lighten: 5)
+  background: fauve(buttons, main_bg, $darken: 20, $rgba: .5)
+  color: fauve(buttons, main_text, $lighten: 5)
   padding: 20px
   ...
 ```
@@ -71,7 +71,7 @@ Furthermore, you may add any number of Sass colour filters using the following s
 
 Add this line to your application's Gemfile:
 
-    gem 'monet'
+    gem 'fauve'
 
 And then execute:
 
@@ -79,7 +79,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install monet
+    $ gem install fauve
 
 
 ## TODO

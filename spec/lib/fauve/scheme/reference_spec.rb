@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-module Monet
+module Fauve
   module Scheme
     describe Reference do
 
@@ -22,7 +22,7 @@ module Monet
             let(:reference_name) { 'like oh my god yo!' }
 
             it 'raises an InvalidReferenceError error' do
-              expect{ subject.key }.to raise_exception Monet::InvalidReferenceError
+              expect{ subject.key }.to raise_exception Fauve::InvalidReferenceError
             end
           end
 

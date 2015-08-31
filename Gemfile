@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-# Specify your gem's dependencies in monet.gemspec
+# Specify your gem's dependencies in fauve.gemspec
 gemspec
 
 group :test do

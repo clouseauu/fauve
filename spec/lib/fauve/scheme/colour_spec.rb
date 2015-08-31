@@ -1,14 +1,14 @@
 require 'spec_helper'
 
-module Monet
+module Fauve
   module Scheme
     describe Colour do
 
-      let(:config)        { YAML.load_file File.expand_path("./spec/fixtures/monet.yml") }
-      let(:colour_map)    { Monet::Scheme::ColourMap.new(config) }
+      let(:config)        { YAML.load_file File.expand_path("./spec/fixtures/fauve.yml") }
+      let(:colour_map)    { Fauve::Scheme::ColourMap.new(config) }
       let(:section_name)  { :scheme }
-      let(:section)       { Monet::Scheme::Section.new(colour_map, section_name) }
-      let(:reference)     { Monet::Scheme::Reference.new(reference_name) }
+      let(:section)       { Fauve::Scheme::Section.new(colour_map, section_name) }
+      let(:reference)     { Fauve::Scheme::Reference.new(reference_name) }
 
       subject { described_class.new( colour_map, section, reference ) }
 
@@ -96,14 +96,14 @@ module Monet
           context 'when the reference is invalid' do
             let(:reference_name) { :invalid_red }
             it 'raises an UndefinedReference error' do
-            expect{ subject }.to raise_exception Monet::UndefinedReferenceError
+            expect{ subject }.to raise_exception Fauve::UndefinedReferenceError
             end
           end
 
           context 'when the reference is circular' do
             let(:reference_name) { :circular_1 }
             it 'raises a CircularReferenceError error' do
-            expect{ subject }.to raise_exception Monet::CircularReferenceError
+            expect{ subject }.to raise_exception Fauve::CircularReferenceError
             end
           end
         end
@@ -115,7 +115,7 @@ module Monet
             let(:reference_name) { 10 }
 
             it 'raises an UndefinedReference error' do
-              expect{ subject }.to raise_exception Monet::UndefinedReferenceError
+              expect{ subject }.to raise_exception Fauve::UndefinedReferenceError
             end
           end
 
@@ -123,7 +123,7 @@ module Monet
             let(:reference_name) { :a_non_declared_key }
 
             it 'raises an UndefinedReference error' do
-              expect{ subject }.to raise_exception Monet::UndefinedReferenceError
+              expect{ subject }.to raise_exception Fauve::UndefinedReferenceError
             end
           end
         end
