@@ -1,5 +1,10 @@
 # Fauve
 
+[![Build Status](https://travis-ci.org/clouseauu/fauve.svg?branch=master)](https://travis-ci.org/clouseauu/fauve)
+[![Code Climate](https://codeclimate.com/github/clouseauu/fauve/badges/gpa.svg)](https://codeclimate.com/github/clouseauu/fauve)
+[![Test Coverage](https://codeclimate.com/github/clouseauu/fauve/badges/coverage.svg)](https://codeclimate.com/github/clouseauu/fauve)
+[![Dependencies](https://gemnasium.com/clouseauu/fauve.svg)](https://gemnasium.com/clouseauu/fauve)
+
 Fauve is a Rails/Sass gem to help you manage your app's colour schemes.
 
 Have you had to scour through a sizeable app's CSS/SCSS/Sass files to change hard-coded colour hex values because you're re-branding? Have you ended up with a `colors.sass` or similar file with 1000 lines of variables? Solving this problem is Fauve's _raison d'être_.
