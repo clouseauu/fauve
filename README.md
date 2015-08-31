@@ -46,12 +46,12 @@ odd_case:
   ...
 ```
 
-You can also use number keys to reference your colours, so the example above can also be written like so:
+You can also use number keys to reference your colours if you use Array syntax, so the config file above references `scheme` as:
 
 ```sass
 .button
-  background: monet(buttons, 0)
-  color: monet(buttons, 1)
+  background: monet(scheme, 3)
+  color: monet(scheme, 2)
   padding: 20px
   ...
 ```
