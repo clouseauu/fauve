@@ -1,4 +1,9 @@
 module Monet
+
+    # Representation of a colour_scheme.
+    # Holds a raw colour map as well as the current section,
+    # reference and colour
+
   class ColourScheme
 
     attr_accessor :colour

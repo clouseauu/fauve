@@ -1,13 +1,18 @@
 module Monet
 
+  # Interface for Monet to talk to Sass.
+  # Applies filters and returns Sass-Object colours
+  # Requires Monet::Scheme::ColourMap, Monet::Scheme::Section
+  # and Monet::Scheme::Reference
+
   class Engine
 
     attr_reader :colour
 
-    def initialize options
-      @sass_context     = options[:sass_context]          || Sass::Script::Functions::EvaluationContext.new {}
-      @filters          = options[:filters]               || {}
-      @raw_colour       = options[:raw_colour]
+    def initialize(context: Sass::Script::Functions::EvaluationContext.new({}), raw_colour: raw_colour, filters: {})
+      @sass_context     = context
+      @filters          = filters
+      @raw_colour       = raw_colour
       @colour           = sass_colour
       run_filters
     end
@@ -17,14 +22,15 @@ module Monet
     attr_reader :filters, :sass_context, :raw_colour
 
     def sass_colour
-      Sass::Script::Color.new to_rgb(raw_colour)
+      Sass::Script::Color.new to_rgb
     end
 
-    def to_rgb hex_colour
-      hex_colour.scan(/^#(..?)(..?)(..?)$/).first.map {|num| num.ljust(2, num).to_i(16)}
+    def to_rgb
+      raw_colour.scan(/^#(..?)(..?)(..?)$/).first.map {|num| num.ljust(2, num).to_i(16)}
     end
 
     def run_filters
+      # binding.pry
       filters.keys.each do |filter|
         @colour = sass_context.send filter.to_sym, colour, filters[filter]
       end

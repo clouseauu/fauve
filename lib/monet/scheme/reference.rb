@@ -1,5 +1,12 @@
 module Monet
   module Scheme
+
+      # Representation of a reference as part of a wider scheme.
+      # Holds a reference, which can be an integer, a string or a
+      # reference to another section[ref] as a string in the form
+      # "scheme[1]" or "buttons[main_text]"
+      # depending on how the config yaml file has been defined.
+
     class Reference
 
       def initialize(reference_name)

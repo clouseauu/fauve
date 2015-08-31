@@ -4,23 +4,24 @@ describe Monet::Engine do
 
   let(:sass_context) { Sass::Script::Functions::EvaluationContext.new( Sass::Environment.new ) }
   let(:amount) { Sass::Script::Number.new(20) }
-  let(:filters) { }
+  let(:filters) { Hash.new }
   let(:raw_colour) { "#ff69b3" }
 
-  let(:monet) { Monet::Engine.new(
-    sass_context: sass_context,
-    filters: filters,
-    raw_colour: raw_colour)
+  let(:engine) { Monet::Engine.new(
+    context: sass_context,
+    raw_colour: raw_colour,
+    filters: filters
+    )
   }
 
   before :each do
-    monet.colour.options = {}
+    engine.colour.options = {}
   end
 
   describe "#colour" do
 
     it 'returns a base colour in the form of a SASS colour object' do
-      expect(monet.colour).to be_an_instance_of Sass::Script::Color
+      expect(engine.colour).to be_an_instance_of Sass::Script::Color
     end
 
     context "when applied filters" do
@@ -28,7 +29,7 @@ describe Monet::Engine do
       let(:filters) { { "lighten" => amount, "saturate" => amount } }
 
       it 'applies said filters and returns the correct colour' do
-        expect(monet.colour.to_s).to eq "#ffcfe7"
+        expect(engine.colour.to_s).to eq "#ffcfe7"
       end
 
     end

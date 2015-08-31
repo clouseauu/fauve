@@ -1,5 +1,11 @@
 module Monet
   module Scheme
+
+    # Representation of a colour as part of a wider scheme.
+    # Holds a raw colour and a colour with filters applied.
+    # Requires Monet::Scheme::ColourMap, Monet::Scheme::Section
+    # and Monet::Scheme::Reference
+
     class Colour
 
       @@candidates = []
@@ -29,8 +35,8 @@ module Monet
       attr_reader :colour_map, :section, :reference, :operations, :candidate
 
       def determine_raw_colour
-        return candidate if is_valid_hex_colour?(candidate)
-        while references_another_section?(candidate) do
+        return candidate if is_valid_hex_colour?
+        while references_another_section? do
           resolve(candidate)
         end
         @@candidates = []
@@ -61,12 +67,12 @@ module Monet
         raise Monet::UndefinedReferenceError.new("Reference isn't a valid index or key")
       end
 
-      def is_valid_hex_colour?(colour)
-        HEX_COLOUR_REGEX === colour
+      def is_valid_hex_colour?
+        HEX_COLOUR_REGEX === candidate
       end
 
-      def references_another_section?(colour)
-        REFERENCE_REGEX === colour
+      def references_another_section?
+        REFERENCE_REGEX === candidate
       end
     end
   end

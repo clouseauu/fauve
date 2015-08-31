@@ -8,16 +8,16 @@ module Monet
   module CLI
 
     def run
-      ap options
     end
+
     module_function :run
 
     def options
-      Trollop::options do
-        opt :output, "Output",  :type => :string, :default => ( defined?(Rails) ? Rails.public_path.to_s : "./" )
-        opt :input, "Input",    :type => :string, :default => ( defined?(Rails) ? "#{Rails.root}/config" : "./" )
-        opt :skip_variations, "Skip variations", :short => "-v"
-      end
+      # Trollop::options do
+      #   opt :output, "Output",  :type => :string, :default => ( defined?(Rails) ? Rails.public_path.to_s : "./" )
+      #   opt :input, "Input",    :type => :string, :default => ( defined?(Rails) ? "#{Rails.root}/config" : "./" )
+      #   opt :skip_variations, "Skip variations", :short => "-v"
+      # end
     end
     module_function :options
 

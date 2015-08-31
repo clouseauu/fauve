@@ -1,5 +1,11 @@
 module Monet
   module Scheme
+
+    # Representation of a section key as part of a wider scheme.
+    # Holds a section name, which points to a top-level key within
+    # a colour scheme.
+    # Takes a Monet::Scheme::ColourMap and a section name (string)
+
     class Section
 
       attr_reader :name

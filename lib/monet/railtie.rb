@@ -1,5 +1,7 @@
 module Monet::Rails
 
+  # Tie Monet options to Rails.
+
   class Railtie < ::Rails::Railtie
     config.monet = ActiveSupport::OrderedOptions.new
 
