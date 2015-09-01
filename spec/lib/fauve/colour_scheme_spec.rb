@@ -4,11 +4,12 @@ module Fauve
 
   describe ColourScheme do
 
-    let(:map)   { YAML.load_file File.expand_path("./spec/fixtures/fauve.yml") }
-    let(:section_name) { :scheme }
+    let(:config_file)    { File.expand_path("./spec/fixtures/fauve.yml") }
+    let(:colour_map)     { Fauve::Scheme::ColourMap.new(YAML.load_file(config_file)) }
+    let(:section_name)   { :scheme }
     let(:reference_name) { 2 }
 
-    subject { described_class.new( map: map, section_name: section_name, reference_name: reference_name ) }
+    subject { described_class.new(section_name: section_name, reference_name: reference_name, colour_map: colour_map ) }
 
     describe '#initialize' do
       it 'instantiates a full colour scheme' do

@@ -4,13 +4,14 @@ module Sass
   module Script
     describe Functions do
 
-      let(:config)    { YAML.load_file File.expand_path("./spec/fixtures/fauve.yml") }
+      let(:config_file)    { File.expand_path("./spec/fixtures/fauve.yml") }
+      let(:colour_map)     { Fauve::Scheme::ColourMap.new(YAML.load_file(config_file)) }
       let(:section)   { :scheme }
-      let(:filters)   { Hash.new }
+      let(:filters)   { [] }
       let(:reference) { 3 }
 
       before do
-        allow(Fauve::Config).to receive(:colour_map).and_return(config)
+        allow(Fauve::Config).to receive(:colour_map).and_return(colour_map)
       end
 
       subject { FauveFunction.new }

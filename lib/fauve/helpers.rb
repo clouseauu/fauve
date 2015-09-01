@@ -17,7 +17,7 @@ module Sass
 
       def raw_colour
         Fauve::ColourScheme.new(
-          map: Fauve::Config::colour_map,
+          colour_map: Fauve::Config::colour_map,
           section_name: fauve_section,
           reference_name: fauve_reference
         ).to_s
