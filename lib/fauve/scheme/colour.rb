@@ -12,8 +12,8 @@ module Fauve
 
       attr_reader :filters, :raw_colour
 
-      def initialize(colour_map, section, reference)
-        @colour_map = colour_map
+      def initialize(section, reference)
+        @colour_map = ColourMap.instance
         @section    = section
         @reference  = reference
         @candidate  = operations.shift
@@ -50,11 +50,11 @@ module Fauve
       end
 
       def recursed(colour)
-        self.class.new(colour_map, source_section(colour), source_reference(colour))
+        self.class.new(source_section(colour), source_reference(colour))
       end
 
       def source_section(key)
-        section.class.new(colour_map, key[SECTION_NAME_REGEX])
+        section.class.new(key[SECTION_NAME_REGEX])
       end
 
       def source_reference(key)

@@ -5,9 +5,8 @@ module Fauve
     describe Section do
 
       let(:section_name) { 'i_like_bananas' }
-      let(:colour_map)     { Scheme::ColourMap.instance }
 
-      subject { described_class.new(colour_map, section_name) }
+      subject { described_class.new(section_name) }
 
       describe '#initialize' do
         it 'exposes the section name' do

@@ -1,7 +1,5 @@
 require 'fauve/version'
 require 'fauve/errors'
-require 'fauve/config'
-
 
 if defined? Rails
   require 'sprockets/railtie'

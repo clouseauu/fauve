@@ -4,14 +4,9 @@ module Sass
   module Script
     describe Functions do
 
-      let(:colour_map)     { Fauve::Scheme::ColourMap.instance }
       let(:section)   { :scheme }
       let(:filters)   { [] }
       let(:reference) { 3 }
-
-      before do
-        allow(Fauve::Config).to receive(:colour_map).and_return(colour_map)
-      end
 
       subject { FauveFunction.new }
 

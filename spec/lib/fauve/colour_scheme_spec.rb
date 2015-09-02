@@ -4,11 +4,10 @@ module Fauve
 
   describe ColourScheme do
 
-    let(:colour_map)     { Scheme::ColourMap.instance }
     let(:section_name)   { :scheme }
     let(:reference_name) { 2 }
 
-    subject { described_class.new(section_name: section_name, reference_name: reference_name, colour_map: colour_map ) }
+    subject { described_class.new(section_name: section_name, reference_name: reference_name) }
 
     describe '#initialize' do
       it 'instantiates a full colour scheme' do

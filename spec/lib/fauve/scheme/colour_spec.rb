@@ -4,12 +4,11 @@ module Fauve
   module Scheme
     describe Colour do
 
-      let(:colour_map)    { Scheme::ColourMap.instance }
       let(:section_name)  { :scheme }
-      let(:section)       { Fauve::Scheme::Section.new(colour_map, section_name) }
+      let(:section)       { Fauve::Scheme::Section.new(section_name) }
       let(:reference)     { Fauve::Scheme::Reference.new(reference_name) }
 
-      subject { described_class.new( colour_map, section, reference ) }
+      subject { described_class.new(section, reference) }
 
       describe '#initialize' do
         context 'when passed filters' do
