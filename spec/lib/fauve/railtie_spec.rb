@@ -27,12 +27,8 @@ module Fauve
       context 'ColourMap configuration' do
 
         it 'sets up a ColourMap object with a hash from fauve.yml' do
-          expect(Scheme::ColourMap.instance.map).to be_a Hash
-        end
-
-        it 'loads the right hash' do
-          an_identifying_key = Scheme::ColourMap.instance.map['links']['main_text']
-          expect(an_identifying_key).to eq 'scheme[1]'
+          expect(described_class.instance.initializers.first.block.source).to match /config\/fauve\.yml/
+          expect(described_class.instance.initializers.first.block.source).to match /Fauve::Scheme::ColourMap.instance.map =/
         end
       end
     end
