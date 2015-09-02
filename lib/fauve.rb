@@ -2,6 +2,7 @@ require 'fauve/version'
 require 'fauve/errors'
 require 'fauve/config'
 
+
 if defined? Rails
   require 'sprockets/railtie'
   require 'fauve/engine'
@@ -14,8 +15,8 @@ if defined? Rails
   require 'fauve/helpers'
 end
 
+
 module Fauve
   module Rails
   end
 end
-

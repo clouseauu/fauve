@@ -15,3 +15,5 @@ require 'fauve/scheme/reference'
 require 'fauve/scheme/colour'
 require 'fauve/colour_scheme'
 require 'fauve/helpers'
+
+Fauve::Scheme::ColourMap.instance.map = YAML.load_file(File.expand_path("./spec/fixtures/fauve.yml"))

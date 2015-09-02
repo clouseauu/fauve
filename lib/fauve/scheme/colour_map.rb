@@ -2,17 +2,14 @@ module Fauve
   module Scheme
 
     # Representation of a colour map as part of a wider scheme.
-    # Holds the colour map hash as defined in the options yaml file
+    # Holds the colour map hash as defined in the fauve.yaml file
 
     class ColourMap
 
-      attr_reader :map
+      include Singleton
 
-      def initialize(map)
-        @map = map
-      end
+      attr_accessor :map
 
-      private
     end
   end
 end

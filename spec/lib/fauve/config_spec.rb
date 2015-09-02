@@ -4,17 +4,18 @@ module Fauve
   describe Config do
 
     let(:config_file)   { File.expand_path("./spec/fixtures/fauve.yml") }
-    let(:map)           { subject.colour_map.map }
+    let(:map)           { Scheme::ColourMap.instance.map }
 
     before do
       allow(Fauve::Rails::Railtie.config.fauve).to receive(:config_file).and_return(config_file)
+      subject.colour_map
     end
 
     subject { described_class }
 
     describe '.colour_map' do
       it 'returns a hashified colour scheme' do
-        expect(subject.colour_map).to be_a Fauve::Scheme::ColourMap
+        expect(map).to be_a Hash
       end
 
       it 'includes all sections' do

@@ -44,7 +44,7 @@ module Fauve
       end
 
       def resolve(colour)
-        raise Fauve::CircularReferenceError.new('Circular reference detected') if @@candidates.include?(colour)
+        raise CircularReferenceError.new('Circular reference detected') if @@candidates.include?(colour)
         @@candidates << colour
         @candidate = recursed(colour).raw_colour
       end
@@ -64,7 +64,7 @@ module Fauve
       def operations
         @operations ||= section.to_h[reference.key].split(',').collect{ |element| element.strip }
       rescue
-        raise Fauve::UndefinedReferenceError.new("Reference isn't a valid index or key")
+        raise UndefinedReferenceError.new("Reference #{reference.key} isn't a valid index or key")
       end
 
       def is_valid_hex_colour?

@@ -4,8 +4,7 @@ module Fauve
 
   describe ColourScheme do
 
-    let(:config_file)    { File.expand_path("./spec/fixtures/fauve.yml") }
-    let(:colour_map)     { Fauve::Scheme::ColourMap.new(YAML.load_file(config_file)) }
+    let(:colour_map)     { Scheme::ColourMap.instance }
     let(:section_name)   { :scheme }
     let(:reference_name) { 2 }
 

@@ -5,8 +5,7 @@ module Fauve
     describe Section do
 
       let(:section_name) { 'i_like_bananas' }
-      let(:config)  { YAML.load_file File.expand_path("./spec/fixtures/fauve.yml") }
-      let(:colour_map) { Fauve::Scheme::ColourMap.new(config) }
+      let(:colour_map)     { Scheme::ColourMap.instance }
 
       subject { described_class.new(colour_map, section_name) }
 
